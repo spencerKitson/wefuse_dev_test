@@ -1,19 +1,27 @@
-import React from 'react';
+import React, { useContext, useEffect } from 'react';
 
-import { BrowserRouter as Router } from 'react-router-dom';
-import history from '../../services/history';
-
+import { GlobalContext } from '../../context/GlobalState';
 import { BlogItem } from './BlogItem';
-
-// import image from '../../assets/image.jpg';
-
-import { Link } from 'react-router-dom';
 
 export const BlogList = () => {
 
+  const { blogPosts, getBlogPosts } = useContext(GlobalContext);
+
+  useEffect(() => {
+    getBlogPosts();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+
   return (
       <>
-        <BlogItem />
+      <div className="list">
+        {blogPosts.map(blogPost => (
+          <BlogItem
+            key={blogPost.slug}
+            blogPost={blogPost}
+          />
+        ))}
+      </div>
       </>
   )
 }

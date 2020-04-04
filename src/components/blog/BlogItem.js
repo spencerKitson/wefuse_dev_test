@@ -1,20 +1,33 @@
-import React from 'react';
+import React, { useContext } from 'react';
 
-import { BrowserRouter as Router } from 'react-router-dom';
-import history from '../../services/history';
+import { GlobalContext } from '../../context/GlobalState';
+import { formatDate } from '../../helpers/assistiveFunctions';
+
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import {
+  faUser,
+  faClock
+} from '@fortawesome/free-solid-svg-icons';
 
 
-// import image from '../../assets/image.jpg';
+export const BlogItem = ({blogPost}) => {
 
-import { Link } from 'react-router-dom';
+  const { handleBlogLink } = useContext(GlobalContext);
 
-export const BlogItem = () => {
+
+  const image = blogPost.banner.image.url || 'https://images.pexels.com/photos/1647962/pexels-photo-1647962.jpeg';
 
   return (
-      <div className='blog-item'>
-          <p className='blog-catagory'>Category</p>
-          <h1 className='blog-title'>This will be a title</h1>
-          <p className='blog-snippet'>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ducimus sint delectus, quidem eum, vel, ab dolore et commodi rerum pariatur perferendis voluptatibus doloremque, ex. Reiciendis cupiditate ipsum ducimus nulla accusantium!</p>
+    <div className="blog-link">
+      <div className='blog-item' data-slug={blogPost.slug} onClick={(e) => handleBlogLink(e)}>
+        <p className='blog-category'>{blogPost.category}</p>
+        <h3 className='blog-title'>{blogPost.title}</h3>
+        <p className='blog-snippet'> <span className="snippet-detail flex-end"><FontAwesomeIcon className='snippet-icon' icon={faClock} size="1x" style={{ color: 'gray' }} /> {formatDate(blogPost.postDate.date)}</span> <span className="snippet-detail flex-start"><FontAwesomeIcon className='snippet-icon' icon={faUser} size="1x" style={{ color: 'gray' }} /> {blogPost.author}</span></p>
+        <div className="image-box">
+          <div className="color-over"></div>
+          <img src={image} alt={image} className="image"/>
+        </div>
       </div>
+    </div>
   )
 }

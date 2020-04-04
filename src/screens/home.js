@@ -1,19 +1,32 @@
-import React from 'react';
+import React, { useContext, useEffect } from 'react';
 
-import { Navbar } from '../components/general/Navbar';
+import { GlobalContext } from '../context/GlobalState';
+
 import { Banner } from '../components/home/Banner';
 import { BlogList } from '../components/blog/BlogList';
-import { Footer } from '../components/general/Footer';
+import { Loading } from '../components/general/Loading';
 
-function Signin() {
+function Home() {
+  const { loading, homepage, getHomeData } = useContext(GlobalContext);
+
+  useEffect(() => {
+    getHomeData();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+
   return (
     <>
-      <Navbar />
-      <Banner />
-      <BlogList />
-      <Footer />
+      {loading
+        ? <div className="full-body">
+            <Loading />
+          </div>
+        : <div className="contain">
+            <Banner/>
+            <BlogList />
+          </div>
+      }
     </>
   );
 }
 
-export default Signin;
+export default Home;
