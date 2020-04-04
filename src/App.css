@@ -560,9 +560,7 @@ animation-timing-function: linear;  */
   }
 }
 
-
-
-@media screen and (max-width:600px), screen and (max-height:500px) {
+@media screen and (max-width:900px), screen and (max-height:500px) {
 
   .extra-margin-left {
     margin-left: -6.25%;
@@ -572,7 +570,7 @@ animation-timing-function: linear;  */
   .title-main {
     text-align: center;
     text-transform: capitalize;
-    padding: 0 25% 0 25%;
+    padding: 0 30% 0 30%;
     font-size: 2.3rem;
     line-height: 2.35rem;
   }
@@ -636,7 +634,4 @@ animation-timing-function: linear;  */
     font-size: 0.5rem !important;
     width: 40%;
   }
-
-
-
 }
